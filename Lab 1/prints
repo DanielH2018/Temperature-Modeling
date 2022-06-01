@@ -1,0 +1,39 @@
+printf("Number of Boxes: %u\n", numGridBoxes);
+printf("Number of Rows: %u\n", numRows);
+printf("Number of Cols: %u\n\n", numCols);
+
+    
+for(i = 0; i < numGridBoxes; i++){
+
+    printf("Box Number: %d\n", i);
+
+    /* Print Coordinates */
+    printf("Box Y Coord: %u\n", current[i].upperLeftY);
+    printf("Box X Coord: %u\n", current[i].upperLeftX);
+    printf("Height: %u\n", current[i].height);
+    printf("Width: %u\n", current[i].width);
+
+    int j;
+    int neighbors = current[i].numTopNeighbors + current[i].numBottomNeighbors + current[i].numRightNeighbors + current[i].numLeftNeighbors;
+    printf("Neighbors:", i);
+    for(j = 0; j < neighbors; j++){
+        printf(" %u", current[i].neighborsID[j]);
+    }
+
+    /* Print DSV */
+    printf("\nBox DSV: %.2f\n\n", current[i].boxDSV);
+}
+
+for(i = 0; i < numGridBoxes; i++){
+            printf("%.2f\t", current[i].boxDSV);
+            if((i + 1) % numCols == 0){
+                printf("\n");
+            }                       
+        }
+
+printf("Max DSV - Min DSV: %.2f\n", maxDSV - minDSV);
+printf("Epsilon * Max DSV: %.2f\n", (epsilon * maxDSV));
+/* Test Grid 4 */
+printf("%.2f\t%.2f\t%.2f\t%.2f\n%.2f\t%.2f\t%.2f\t%.2f\n%.2f\t%.2f\t%.2f\t%.2f\n%.2f\t%.2f\t%.2f\t%.2f\n\n", current[0].boxDSV, current[1].boxDSV, current[2].boxDSV, current[3].boxDSV, current[4].boxDSV, current[5].boxDSV, current[5].boxDSV, current[6].boxDSV, current[7].boxDSV, current[5].boxDSV, current[5].boxDSV, current[8].boxDSV, current[9].boxDSV, current[10].boxDSV, current[11].boxDSV, current[12].boxDSV);
+/* Test Grid 5 */
+printf("%.2f\t%.2f\t%.2f\t\n%.2f\t%.2f\t%.2f\t\n%.2f\t%.2f\t%.2f\t\n%.2f\t%.2f\t%.2f\t\n\n", current[0].boxDSV, current[1].boxDSV, current[2].boxDSV, current[3].boxDSV, current[4].boxDSV, current[5].boxDSV, current[6].boxDSV, current[4].boxDSV, current[5].boxDSV, current[7].boxDSV, current[8].boxDSV, current[9].boxDSV);

@@ -1,0 +1,26 @@
+#PBS -l walltime=00:30:00
+#PBS -l nodes=1:ppn=28
+#PBS -A PAS1798
+#
+export AOUT_BASE='smr_csr'
+export INSTANCE='serial'
+export VERSION='1'
+export COMPILER='icc'
+export INFILE='testgrid_2'
+export TEST='001'
+
+echo job started at `date`
+echo on compute node `cat $PBS_NODEFILE`
+
+cd $PBS_O_WORKDIR
+# /users/PAS1798/osu1053/CSE5441/lab1
+cp $INFILE $TMPDIR
+cd $TMPDIR
+$PBS_O_WORKDIR/${AOUT_BASE}'.'${INSTANCE}'.'${VERSION}  <$INFILE >current.out 2>&1
+
+# be sure you have created the "tests" subdirectory before submitting this batch
+export SAVEDIR=${PBS_O_WORKDIR}'/tests/'${INSTANCE}${TEST}'.'${PBS_JOBID}
+mkdir ${SAVEDIR}
+mv current.out *.dat ${SAVEDIR}
+echo job ended at `date`
+
